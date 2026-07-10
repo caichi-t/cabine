@@ -5,6 +5,7 @@ Static GitHub Pages site for cabine.
 ## Published Pages
 
 - `https://cabine.io/ding-dong-dash/privacy/`
+- `https://cabine.io/coteka/privacy/`
 
 ## Notes
 
