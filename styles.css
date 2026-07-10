@@ -65,6 +65,19 @@ h1 {
   font-size: 0.95rem;
 }
 
+.language-nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.language-nav span {
+  font-weight: 700;
+}
+
 section {
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
@@ -97,14 +110,6 @@ li + li {
 
 address {
   font-style: normal;
-}
-
-.english {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  margin-top: 28px;
-  padding: 24px;
 }
 
 .redirect {
