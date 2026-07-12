@@ -90,6 +90,17 @@ h2 {
   letter-spacing: 0;
 }
 
+h3 {
+  margin: 24px 0 8px;
+  font-size: 1.04rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+h2 + h3 {
+  margin-top: 0;
+}
+
 p {
   margin: 0 0 12px;
 }
