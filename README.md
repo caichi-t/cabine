@@ -7,6 +7,7 @@ Static GitHub Pages site for cabine.
 - `https://cabine.io/ding-dong-dash/privacy/`
 - `https://cabine.io/coteka/privacy/`
 - `https://cabine.io/coteka/support/`
+- `https://cabine.io/coteka/support/en/`
 
 ## Notes
 
