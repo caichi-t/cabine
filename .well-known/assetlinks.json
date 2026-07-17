@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.cabine.coteka",
+      "sha256_cert_fingerprints": [
+        "53:FB:A8:FF:59:A4:B6:EE:69:DE:A3:49:75:1E:9B:D8:1C:2E:6D:55:18:7B:3C:6B:0C:61:34:39:0B:68:4E:30"
+      ]
+    }
+  }
+]

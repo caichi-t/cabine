@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coteka への招待</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/styles.css?v=20260710-4">
+  </head>
+  <body>
+    <main class="policy-page">
+      <!--
+        GitHub Pages は存在しないパスに対してこの 404.html を返す。招待リンク
+        /coteka/invite/<token> は静的ファイルとして存在しないため、必ずここに落ちてくる。
+        アプリ導入済みの端末では Universal Links / App Links が先に働いてアプリが直接開くので、
+        このページが見えるのは「未導入」または「リンク検証が未完了」の場合だけ。
+      -->
+      <header class="policy-hero" aria-labelledby="page-title">
+        <h1 id="page-title">ページが見つかりません</h1>
+        <p class="lead">お探しのページは存在しないか、移動した可能性があります。</p>
+      </header>
+      <section id="fallback-nav">
+        <p><a href="/">トップページへ</a></p>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var m = location.pathname.match(/^\/coteka\/invite\/([^/]+)\/?$/);
+        if (!m) return;
+
+        var token = m[1];
+        var appStore = 'https://apps.apple.com/app/id6789443952';
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        var isAndroid = /Android/.test(navigator.userAgent);
+
+        document.title = 'Coteka への招待';
+        document.getElementById('page-title').textContent = 'Coteka に招待されています';
+        document.querySelector('.policy-hero .lead').textContent =
+          'Coteka をインストールしてこのリンクをもう一度開くと、ふたりの精算をすぐに始められます。';
+
+        var nav = document.getElementById('fallback-nav');
+        nav.innerHTML = '';
+
+        // LINE などのアプリ内ブラウザは https リンクを webview で直接開くため、
+        // アプリ導入済みでも Universal Links / App Links が発火せずこのページに着地する。
+        // その場合の唯一の復帰手段がカスタムスキームでの起動。
+        var open = document.createElement('p');
+        var openLink = document.createElement('a');
+        openLink.href = 'coteka://invite/' + encodeURIComponent(token);
+        openLink.textContent = 'アプリで開く';
+        open.appendChild(openLink);
+        nav.appendChild(open);
+
+        if (isIOS || !isAndroid) {
+          var store = document.createElement('p');
+          var storeLink = document.createElement('a');
+          storeLink.href = appStore;
+          storeLink.textContent = 'App Store で Coteka を入手';
+          store.appendChild(storeLink);
+          nav.appendChild(store);
+        }
+
+        var home = document.createElement('p');
+        home.innerHTML = '<a href="/">トップページへ</a>';
+        nav.appendChild(home);
+      })();
+    </script>
+  </body>
+</html>

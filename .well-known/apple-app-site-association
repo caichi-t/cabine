@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["8596574PTA.io.cabine.coteka"],
+        "components": [
+          {
+            "/": "/coteka/invite/*",
+            "comment": "Coteka partner invite links open in the app"
+          }
+        ]
+      }
+    ]
+  }
+}
