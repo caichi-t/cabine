@@ -3,26 +3,144 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coteka への招待</title>
+    <title>ページが見つかりません</title>
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <link rel="stylesheet" href="/styles.css?v=20260710-4">
+    <script>
+      // 招待リンク /coteka/invite/<token> は静的ファイルとして存在しないため、GitHub Pages が
+      // この 404.html を返す。通常の 404 が一瞬見えてしまわないよう、描画前にここで振り分ける。
+      if (/^\/coteka\/invite\/[^/]+\/?$/.test(location.pathname)) {
+        document.documentElement.className = 'is-invite';
+        document.title = 'Coteka への招待';
+      }
+    </script>
+    <style>
+      .is-invite .notfound,
+      :root:not(.is-invite) .invite { display: none; }
+
+      .invite {
+        --coteka-blue: #4a90d9;
+        --coteka-ink: #1d2b3a;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: linear-gradient(170deg, #e6f4fe 0%, #f7fbff 55%, #fbfaf7 100%);
+      }
+      .invite-card {
+        width: min(400px, 100%);
+        padding: 40px 28px 32px;
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid rgba(74, 144, 217, 0.14);
+        box-shadow: 0 18px 48px rgba(29, 43, 58, 0.09);
+        text-align: center;
+      }
+      .invite-icon {
+        width: 84px;
+        height: 84px;
+        border-radius: 19px;
+        display: block;
+        margin: 0 auto 20px;
+        box-shadow: 0 6px 18px rgba(74, 144, 217, 0.22);
+      }
+      /* 日本語は語中で不自然に折り返しやすい（「招待リ／ンク」など）。文節単位で改行しつつ
+         行を均して孤立行を防ぐ。auto-phrase 未対応のブラウザでは既定の折り返しに戻るだけ。 */
+      .invite-card h1,
+      .invite-lead,
+      .invite-note {
+        text-wrap: balance;
+        word-break: auto-phrase;
+      }
+
+      .invite-card h1 {
+        font-size: 1.45rem;
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+        color: var(--coteka-ink);
+      }
+      .invite-lead {
+        margin: 10px 0 28px;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      .invite-open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 20px;
+        border-radius: 14px;
+        background: var(--coteka-blue);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(74, 144, 217, 0.32);
+      }
+      .invite-open img { width: 24px; height: 24px; border-radius: 6px; }
+      .invite-open:active { transform: translateY(1px); }
+
+      .invite-note { margin: 12px 0 0; font-size: 0.8rem; color: var(--muted); }
+
+      .invite-sep {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 28px 0 20px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+      .invite-sep::before,
+      .invite-sep::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .invite-stores {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .invite-stores a { display: inline-flex; }
+      /* 公式バッジは余白の量が異なるため、黒い帯の見た目の高さが揃うよう個別に調整する。 */
+      .invite-stores .badge-apple { height: 42px; }
+      .invite-stores .badge-google { height: 52px; }
+    </style>
   </head>
   <body>
-    <main class="policy-page">
-      <!--
-        GitHub Pages は存在しないパスに対してこの 404.html を返す。招待リンク
-        /coteka/invite/<token> は静的ファイルとして存在しないため、必ずここに落ちてくる。
-        アプリ導入済みの端末では Universal Links / App Links が先に働いてアプリが直接開くので、
-        このページが見えるのは「未導入」または「リンク検証が未完了」の場合だけ。
-      -->
-      <header class="policy-hero" aria-labelledby="page-title">
-        <h1 id="page-title">ページが見つかりません</h1>
+    <!-- 通常の 404 -->
+    <main class="policy-page notfound">
+      <header class="policy-hero">
+        <h1>ページが見つかりません</h1>
         <p class="lead">お探しのページは存在しないか、移動した可能性があります。</p>
       </header>
-      <section id="fallback-nav">
-        <p><a href="/">トップページへ</a></p>
-      </section>
+      <section><p><a href="/">トップページへ</a></p></section>
+    </main>
+
+    <!-- 招待リンクの着地ページ -->
+    <main class="invite">
+      <div class="invite-card">
+        <img class="invite-icon" src="/assets/coteka-icon.png" alt="">
+        <h1>Coteka に招待されています</h1>
+        <p class="invite-lead">ふたりの立替と精算をシンプルに。</p>
+
+        <a class="invite-open" id="open-app" href="#">
+          <img src="/assets/coteka-icon.png" alt="">アプリで開く
+        </a>
+        <p class="invite-note">インストール済みの方はこちら</p>
+
+        <div class="invite-sep">まだアプリをお持ちでない方</div>
+        <div class="invite-stores" id="stores"></div>
+        <p class="invite-note">インストール後、この招待リンクをもう一度開いてください</p>
+      </div>
     </main>
 
     <script>
@@ -30,41 +148,28 @@
         var m = location.pathname.match(/^\/coteka\/invite\/([^/]+)\/?$/);
         if (!m) return;
 
-        var token = m[1];
-        var appStore = 'https://apps.apple.com/app/id6789443952';
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        var isAndroid = /Android/.test(navigator.userAgent);
+        // LINE などのアプリ内ブラウザは https リンクを webview で直接開くため、アプリ導入済みでも
+        // Universal Links / App Links が発火せずこのページに着地する。そこからの復帰手段。
+        document.getElementById('open-app').href = 'coteka://invite/' + encodeURIComponent(m[1]);
 
-        document.title = 'Coteka への招待';
-        document.getElementById('page-title').textContent = 'Coteka に招待されています';
-        document.querySelector('.policy-hero .lead').textContent =
-          'Coteka をインストールしてこのリンクをもう一度開くと、ふたりの精算をすぐに始められます。';
+        var APPLE = { href: 'https://apps.apple.com/app/id6789443952', src: '/assets/app-store-badge.svg', cls: 'badge-apple', alt: 'App Store でダウンロード' };
+        var GOOGLE = { href: 'https://play.google.com/store/apps/details?id=io.cabine.coteka', src: '/assets/google-play-badge.png', cls: 'badge-google', alt: 'Google Play で手に入れよう' };
 
-        var nav = document.getElementById('fallback-nav');
-        nav.innerHTML = '';
+        var ua = navigator.userAgent;
+        // 判別できない環境（PC や、Macintosh を名乗る iPadOS）では両方出す。
+        var badges = /Android/.test(ua) ? [GOOGLE] : /iPad|iPhone|iPod/.test(ua) ? [APPLE] : [APPLE, GOOGLE];
 
-        // LINE などのアプリ内ブラウザは https リンクを webview で直接開くため、
-        // アプリ導入済みでも Universal Links / App Links が発火せずこのページに着地する。
-        // その場合の唯一の復帰手段がカスタムスキームでの起動。
-        var open = document.createElement('p');
-        var openLink = document.createElement('a');
-        openLink.href = 'coteka://invite/' + encodeURIComponent(token);
-        openLink.textContent = 'アプリで開く';
-        open.appendChild(openLink);
-        nav.appendChild(open);
-
-        if (isIOS || !isAndroid) {
-          var store = document.createElement('p');
-          var storeLink = document.createElement('a');
-          storeLink.href = appStore;
-          storeLink.textContent = 'App Store で Coteka を入手';
-          store.appendChild(storeLink);
-          nav.appendChild(store);
-        }
-
-        var home = document.createElement('p');
-        home.innerHTML = '<a href="/">トップページへ</a>';
-        nav.appendChild(home);
+        var stores = document.getElementById('stores');
+        badges.forEach(function (b) {
+          var a = document.createElement('a');
+          a.href = b.href;
+          var img = document.createElement('img');
+          img.src = b.src;
+          img.alt = b.alt;
+          img.className = b.cls;
+          a.appendChild(img);
+          stores.appendChild(a);
+        });
       })();
     </script>
   </body>
