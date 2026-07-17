@@ -68,10 +68,7 @@
         color: var(--muted);
       }
       .invite-open {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+        display: block;
         padding: 15px 20px;
         border-radius: 14px;
         background: var(--coteka-blue);
@@ -81,7 +78,6 @@
         text-decoration: none;
         box-shadow: 0 4px 14px rgba(74, 144, 217, 0.32);
       }
-      .invite-open img { width: 24px; height: 24px; border-radius: 6px; }
       .invite-open:active { transform: translateY(1px); }
 
       .invite-note { margin: 12px 0 0; font-size: 0.8rem; color: var(--muted); }
@@ -132,9 +128,7 @@
         <h1>Coteka に招待されています</h1>
         <p class="invite-lead">ふたりの立替と精算をシンプルに。</p>
 
-        <a class="invite-open" id="open-app" href="#">
-          <img src="/assets/coteka-icon.png" alt="">アプリで開く
-        </a>
+        <a class="invite-open" id="open-app" href="#">アプリで開く</a>
         <p class="invite-note">インストール済みの方はこちら</p>
 
         <div class="invite-sep">まだアプリをお持ちでない方</div>
