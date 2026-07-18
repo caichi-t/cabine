@@ -8,6 +8,8 @@ Static GitHub Pages site for cabine.
 - `https://cabine.io/coteka/privacy/`
 - `https://cabine.io/coteka/support/`
 - `https://cabine.io/coteka/support/en/`
+- `https://cabine.io/hutari-post/privacy/`
+- `https://cabine.io/hutari-post/support/`
 
 ## Notes
 
