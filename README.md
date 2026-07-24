@@ -10,6 +10,7 @@ Static GitHub Pages site for cabine.
 - `https://cabine.io/coteka/support/en/`
 - `https://cabine.io/hutari-post/privacy/`
 - `https://cabine.io/hutari-post/support/`
+- `https://cabine.io/hutari-post/invite/<code>`（Universal Links / App Links、未導入時の案内ページ）
 
 ## Notes
 

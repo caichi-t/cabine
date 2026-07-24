@@ -8,11 +8,12 @@
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <link rel="stylesheet" href="/styles.css?v=20260710-4">
     <script>
-      // 招待リンク /coteka/invite/<token> は静的ファイルとして存在しないため、GitHub Pages が
-      // この 404.html を返す。通常の 404 が一瞬見えてしまわないよう、描画前にここで振り分ける。
-      if (/^\/coteka\/invite\/[^/]+\/?$/.test(location.pathname)) {
-        document.documentElement.className = 'is-invite';
-        document.title = 'Coteka への招待';
+      // 招待リンクは静的ファイルとして存在しないため、GitHub Pages がこの 404.html を返す。
+      // 通常の 404 が一瞬見えてしまわないよう、描画前にここで振り分ける。
+      var inviteProduct = location.pathname.match(/^\/(coteka|hutari-post)\/invite\/[^/]+\/?$/)?.[1];
+      if (inviteProduct) {
+        document.documentElement.className = 'is-invite invite-' + inviteProduct;
+        document.title = inviteProduct === 'coteka' ? 'Coteka への招待' : 'ふたりのポストへの招待';
       }
     </script>
     <style>
@@ -20,21 +21,33 @@
       :root:not(.is-invite) .invite { display: none; }
 
       .invite {
-        --coteka-blue: #4a90d9;
-        --coteka-ink: #1d2b3a;
+        --invite-accent: #4a90d9;
+        --invite-ink: #1d2b3a;
+        --invite-soft: #e6f4fe;
+        --invite-border: rgba(74, 144, 217, 0.14);
+        --invite-shadow: rgba(74, 144, 217, 0.32);
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 24px;
-        background: linear-gradient(170deg, #e6f4fe 0%, #f7fbff 55%, #fbfaf7 100%);
+        background: linear-gradient(170deg, var(--invite-soft) 0%, #f7fbff 55%, #fbfaf7 100%);
+      }
+      .invite-hutari-post .invite {
+        --invite-accent: #f25482;
+        --invite-ink: #35333a;
+        --invite-soft: #ffe2ea;
+        --invite-border: rgba(242, 84, 130, 0.18);
+        --invite-shadow: rgba(242, 84, 130, 0.3);
+        background: linear-gradient(165deg, #fff1f5 0%, #fff9ed 55%, #f1edff 100%);
+        font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
       }
       .invite-card {
         width: min(400px, 100%);
         padding: 40px 28px 32px;
         border-radius: 24px;
         background: #fff;
-        border: 1px solid rgba(74, 144, 217, 0.14);
+        border: 1px solid var(--invite-border);
         box-shadow: 0 18px 48px rgba(29, 43, 58, 0.09);
         text-align: center;
       }
@@ -45,6 +58,44 @@
         display: block;
         margin: 0 auto 20px;
         box-shadow: 0 6px 18px rgba(74, 144, 217, 0.22);
+      }
+      .invite-hutari-post .invite-icon { display: none; }
+      .hutari-invite-icon {
+        width: 84px;
+        height: 84px;
+        display: none;
+        place-items: center;
+        margin: 0 auto 20px;
+        border-radius: 20px;
+        background: #fff9ed;
+        box-shadow: 0 6px 18px rgba(242, 84, 130, 0.2);
+      }
+      .invite-hutari-post .hutari-invite-icon { display: grid; }
+      .hutari-postbox {
+        width: 48px;
+        height: 53px;
+        position: relative;
+        border-radius: 16px 16px 9px 9px;
+        background: var(--invite-accent);
+      }
+      .hutari-postbox::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 8px;
+        left: 9px;
+        top: 13px;
+        border-radius: 999px;
+        background: #fff9ed;
+      }
+      .hutari-postbox::after {
+        content: "♥";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -18px;
+        color: #8d78d6;
+        font-size: 17px;
       }
       /* 日本語は語中で不自然に折り返しやすい（「招待リ／ンク」など）。文節単位で改行しつつ
          行を均して孤立行を防ぐ。auto-phrase 未対応のブラウザでは既定の折り返しに戻るだけ。 */
@@ -59,7 +110,7 @@
         font-size: 1.45rem;
         line-height: 1.45;
         letter-spacing: 0.01em;
-        color: var(--coteka-ink);
+        color: var(--invite-ink);
       }
       .invite-lead {
         margin: 10px 0 28px;
@@ -71,12 +122,12 @@
         display: block;
         padding: 15px 20px;
         border-radius: 14px;
-        background: var(--coteka-blue);
+        background: var(--invite-accent);
         color: #fff;
         font-size: 1rem;
         font-weight: 700;
         text-decoration: none;
-        box-shadow: 0 4px 14px rgba(74, 144, 217, 0.32);
+        box-shadow: 0 4px 14px var(--invite-shadow);
       }
       .invite-open:active { transform: translateY(1px); }
 
@@ -109,6 +160,18 @@
       /* 公式バッジは余白の量が異なるため、黒い帯の見た目の高さが揃うよう個別に調整する。 */
       .invite-stores .badge-apple { height: 42px; }
       .invite-stores .badge-google { height: 52px; }
+      .invite-release-note {
+        display: none;
+        margin: 0;
+        padding: 14px 16px;
+        border-radius: 13px;
+        background: #fff5d9;
+        color: #756129;
+        font-size: 0.85rem;
+        line-height: 1.7;
+      }
+      .invite-hutari-post .invite-release-note { display: block; }
+      .invite-hutari-post .invite-install-note { display: none; }
     </style>
   </head>
   <body>
@@ -125,33 +188,45 @@
     <main class="invite">
       <div class="invite-card">
         <img class="invite-icon" src="/assets/coteka-icon.png" alt="">
-        <h1>Coteka に招待されています</h1>
-        <p class="invite-lead">ふたりの立替と精算をシンプルに。</p>
+        <div class="hutari-invite-icon" aria-hidden="true"><span class="hutari-postbox"></span></div>
+        <h1 id="invite-title">Coteka に招待されています</h1>
+        <p class="invite-lead" id="invite-lead">ふたりの立替と精算をシンプルに。</p>
 
         <a class="invite-open" id="open-app" href="#">アプリで開く</a>
         <p class="invite-note">インストール済みの方はこちら</p>
 
         <div class="invite-sep">まだアプリをお持ちでない方</div>
         <div class="invite-stores" id="stores"></div>
-        <p class="invite-note">インストール後、この招待リンクをもう一度開いてください</p>
+        <p class="invite-release-note" id="release-note">ふたりのポストは現在、ストア公開の準備中です。すでにアプリをお持ちの方は、上のボタンから開いてください。</p>
+        <p class="invite-note invite-install-note">インストール後、この招待リンクをもう一度開いてください</p>
       </div>
     </main>
 
     <script>
       (function () {
-        var m = location.pathname.match(/^\/coteka\/invite\/([^/]+)\/?$/);
+        var m = location.pathname.match(/^\/(coteka|hutari-post)\/invite\/([^/]+)\/?$/);
         if (!m) return;
 
         // LINE などのアプリ内ブラウザは https リンクを webview で直接開くため、アプリ導入済みでも
         // Universal Links / App Links が発火せずこのページに着地する。そこからの復帰手段。
-        document.getElementById('open-app').href = 'coteka://invite/' + encodeURIComponent(m[1]);
+        var product = m[1];
+        var token = m[2];
+        if (product === 'coteka') {
+          document.getElementById('open-app').href = 'coteka://invite/' + encodeURIComponent(token);
+        } else {
+          document.getElementById('invite-title').textContent = 'ふたりのポストに招待されています';
+          document.getElementById('invite-lead').textContent = '大切な言葉を、手紙にして届けよう。';
+          document.getElementById('open-app').href = 'hutari-post://join/' + encodeURIComponent(token);
+        }
 
         var APPLE = { href: 'https://apps.apple.com/app/id6789443952', src: '/assets/app-store-badge.svg', cls: 'badge-apple', alt: 'App Store でダウンロード' };
         var GOOGLE = { href: 'https://play.google.com/store/apps/details?id=io.cabine.coteka', src: '/assets/google-play-badge.png', cls: 'badge-google', alt: 'Google Play で手に入れよう' };
 
         var ua = navigator.userAgent;
         // 判別できない環境（PC や、Macintosh を名乗る iPadOS）では両方出す。
-        var badges = /Android/.test(ua) ? [GOOGLE] : /iPad|iPhone|iPod/.test(ua) ? [APPLE] : [APPLE, GOOGLE];
+        var badges = product === 'coteka'
+          ? (/Android/.test(ua) ? [GOOGLE] : /iPad|iPhone|iPod/.test(ua) ? [APPLE] : [APPLE, GOOGLE])
+          : [];
 
         var stores = document.getElementById('stores');
         badges.forEach(function (b) {

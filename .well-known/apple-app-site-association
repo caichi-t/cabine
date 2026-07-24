@@ -9,6 +9,15 @@
             "comment": "Coteka partner invite links open in the app"
           }
         ]
+      },
+      {
+        "appIDs": ["8596574PTA.io.cabine.hutari-post"],
+        "components": [
+          {
+            "/": "/hutari-post/invite/*",
+            "comment": "Hutari Post partner invite links open in the app"
+          }
+        ]
       }
     ]
   }

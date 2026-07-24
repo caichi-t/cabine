@@ -8,5 +8,15 @@
         "53:FB:A8:FF:59:A4:B6:EE:69:DE:A3:49:75:1E:9B:D8:1C:2E:6D:55:18:7B:3C:6B:0C:61:34:39:0B:68:4E:30"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.cabine.hutari_post",
+      "sha256_cert_fingerprints": [
+        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
+      ]
+    }
   }
 ]
