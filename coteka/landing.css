@@ -177,8 +177,8 @@ a {
   display: grid;
   min-height: 710px;
   align-items: center;
-  gap: 62px;
-  grid-template-columns: minmax(430px, 0.86fr) minmax(0, 1.14fr);
+  gap: 48px;
+  grid-template-columns: minmax(500px, 1fr) minmax(0, 1fr);
   padding-block: 64px 76px;
 }
 
@@ -212,7 +212,7 @@ a {
 
 .hero h1 {
   margin: 24px 0 22px;
-  font-size: clamp(2.85rem, 4.5vw, 4.7rem);
+  font-size: clamp(2.6rem, 4vw, 3.1rem);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1.15;
@@ -220,6 +220,7 @@ a {
 
 .hero h1 span {
   display: block;
+  white-space: nowrap;
 }
 
 .hero-lead {
