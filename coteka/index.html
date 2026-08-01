@@ -228,18 +228,18 @@
                   個人の買い物など、片方だけが負担する分も自由に調整できます。
                 </p>
                 <div class="split-options" role="group" aria-label="支払いの分け方を試す">
-                  <button type="button" data-split="half" aria-pressed="false" aria-controls="balance-example">折半</button>
+                  <button type="button" data-split="half" aria-pressed="true" aria-controls="balance-example">折半</button>
                   <button type="button" data-split="ratio" aria-pressed="false" aria-controls="balance-example">手取り比率</button>
-                  <button type="button" data-split="personal" aria-pressed="true" aria-controls="balance-example">個別負担</button>
+                  <button type="button" data-split="personal" aria-pressed="false" aria-controls="balance-example">個別負担</button>
                 </div>
               </div>
               <div class="balance-visual" id="balance-example">
-                <p id="balance-label">個人の買い物</p>
+                <p id="balance-label">折半の場合</p>
                 <strong>¥4,500</strong>
                 <div class="balance-line">
-                  <span><small>あなた</small><b id="your-balance">¥4,500</b></span>
+                  <span><small>あなた</small><b id="your-balance">¥2,250</b></span>
                   <i aria-hidden="true"></i>
-                  <span><small>パートナー</small><b id="partner-balance">¥0</b></span>
+                  <span><small>パートナー</small><b id="partner-balance">¥2,250</b></span>
                 </div>
                 <p class="visually-hidden" id="balance-status" aria-live="polite"></p>
               </div>
