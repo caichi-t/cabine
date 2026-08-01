@@ -7,7 +7,7 @@
     <title>Coteka（コテカ）｜ふたりの立替・精算アプリ</title>
     <meta
       name="description"
-      content="Coteka（コテカ）は、カップル・夫婦・同棲・ルームシェアなど、ふたりの毎日の立替をかんたんに記録・精算できるアプリです。"
+      content="Coteka（コテカ）は、ふたりの毎日の立替をかんたんに記録・精算できるアプリです。支払い・精算の変更や定期支払いも通知で確認できます。"
     >
     <link rel="canonical" href="https://cabine.io/coteka/">
     <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Coteka｜ふたりの立替、これひとつで">
     <meta
       property="og:description"
-      content="記録するだけで、誰がいくら払うかを自動計算。ふたりのための立替・精算アプリ。"
+      content="記録するだけで負担額を自動計算。支払い・精算の変更もすぐ届く、ふたりのための立替・精算アプリ。"
     >
     <meta property="og:url" content="https://cabine.io/coteka/">
     <meta property="og:image" content="https://cabine.io/coteka/assets/coteka-hero.png?v=20260802-1">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../assets/coteka-icon.png">
     <link rel="apple-touch-icon" href="../assets/coteka-icon.png">
-    <link rel="stylesheet" href="./landing.css?v=20260729-3">
+    <link rel="stylesheet" href="./landing.css?v=20260802-3">
   </head>
   <body>
     <header class="site-header">
@@ -62,8 +62,8 @@
               <span>ふたりの「わかる」に。</span>
             </h1>
             <p class="hero-lead">
-              毎日の支払いをサクッと記録。誰がいくら払えばいいか、
-              Cotekaが自動で計算します。
+              毎日の支払いをサクッと記録。誰がいくら払えばいいかを自動で計算し、
+              ふたりの変更もすぐにお知らせします。
             </p>
             <div class="store-links" aria-label="アプリをダウンロード">
               <a
@@ -87,6 +87,7 @@
               <li>アカウント登録不要</li>
               <li>無料ではじめられる</li>
               <li>1人でも使える</li>
+              <li>支払い・精算の変更を通知</li>
             </ul>
           </div>
 
@@ -223,28 +224,62 @@
                 <span class="card-number">01</span>
                 <h3>ふたりに合う<br>分け方を選べる</h3>
                 <p>
-                  きっちり折半、手取りに合わせた比率、どちらか一方の負担まで。
-                  端数をどちらが持つかも決められます。
+                  支払いごとに、折半・手取り比率・個別負担を選べます。
+                  個人の買い物など、片方だけが負担する分も自由に調整できます。
                 </p>
-                <div class="split-options" aria-hidden="true">
-                  <span class="active">折半</span>
-                  <span>手取り比率</span>
-                  <span>自由に調整</span>
+                <div class="split-options" role="group" aria-label="支払いの分け方を試す">
+                  <button type="button" data-split="half" aria-pressed="false" aria-controls="balance-example">折半</button>
+                  <button type="button" data-split="ratio" aria-pressed="false" aria-controls="balance-example">手取り比率</button>
+                  <button type="button" data-split="personal" aria-pressed="true" aria-controls="balance-example">個別負担</button>
                 </div>
               </div>
-              <div class="balance-visual" aria-label="4,500円を2,250円ずつ折半">
-                <p>スーパー</p>
+              <div class="balance-visual" id="balance-example">
+                <p id="balance-label">個人の買い物</p>
                 <strong>¥4,500</strong>
                 <div class="balance-line">
-                  <span><small>あなた</small>¥2,250</span>
+                  <span><small>あなた</small><b id="your-balance">¥4,500</b></span>
                   <i aria-hidden="true"></i>
-                  <span><small>パートナー</small>¥2,250</span>
+                  <span><small>パートナー</small><b id="partner-balance">¥0</b></span>
+                </div>
+                <p class="visually-hidden" id="balance-status" aria-live="polite"></p>
+              </div>
+            </article>
+
+            <article class="feature-card feature-card-wide notification-card">
+              <div class="notification-copy">
+                <span class="card-number">02</span>
+                <h3>変更がすぐ届く。<br>ふたりでダブルチェック</h3>
+                <p>
+                  パートナーが支払い・精算を追加、編集、削除するとすぐに通知。
+                  定期支払いの発生も確認できるため、見落としや入力間違いに気づきやすくなります。
+                </p>
+                <div class="notification-tags" aria-label="通知される内容">
+                  <span>追加・編集・削除</span>
+                  <span>定期支払い</span>
+                </div>
+              </div>
+              <div class="notification-visual" aria-label="Cotekaから届く支払い、精算、定期支払いの通知例">
+                <p class="notification-date">きょう</p>
+                <div class="notification-item">
+                  <span class="notification-icon notification-icon-blue" aria-hidden="true">¥</span>
+                  <p><strong>Coteka</strong><small>パートナーさんが支払いを追加しました</small></p>
+                  <time>たった今</time>
+                </div>
+                <div class="notification-item">
+                  <span class="notification-icon notification-icon-pink" aria-hidden="true">↔</span>
+                  <p><strong>Coteka</strong><small>パートナーさんが精算を編集しました</small></p>
+                  <time>1分前</time>
+                </div>
+                <div class="notification-item">
+                  <span class="notification-icon notification-icon-mint" aria-hidden="true">↻</span>
+                  <p><strong>Coteka</strong><small>定期支払い「家賃」が記録されました</small></p>
+                  <time>9:00</time>
                 </div>
               </div>
             </article>
 
             <article class="feature-card invite-card">
-              <span class="card-number">02</span>
+              <span class="card-number">03</span>
               <h3>招待リンクで<br>すぐにつながる</h3>
               <p>リンクを送るだけ。ふたりの記録はリアルタイムで同じ画面に。</p>
               <div class="invite-visual" aria-hidden="true">
@@ -255,7 +290,7 @@
             </article>
 
             <article class="feature-card recurring-card">
-              <span class="card-number">03</span>
+              <span class="card-number">04</span>
               <h3>毎月の支払いは<br>自動で記録</h3>
               <p>家賃や光熱費などの固定費は、定期支払いに登録して手間を省けます。</p>
               <div class="recurring-list" aria-hidden="true">
@@ -266,7 +301,7 @@
 
             <article class="feature-card feature-card-wide theme-card">
               <div class="theme-copy">
-                <span class="card-number">04</span>
+                <span class="card-number">05</span>
                 <h3>暮らしに合わせて、<br>心地よく使える</h3>
                 <p>
                   ダークモードと16言語に対応。シンプルで見やすい画面だから、
@@ -374,8 +409,15 @@
             <details>
               <summary>支払いの分け方は選べますか？</summary>
               <p>
-                折半・手取り比率・片方負担から選べます。負担額を直接調整することもでき、
-                割り切れない端数をどちらが負担するかも設定できます。
+                支払いごとに折半・手取り比率・個別負担を選べます。個人の買い物など、
+                片方だけが負担する支払いも設定でき、負担額を直接調整できます。
+              </p>
+            </details>
+            <details>
+              <summary>パートナーが変更した内容は分かりますか？</summary>
+              <p>
+                はい。支払い・精算の追加、編集、削除や、定期支払いの発生を通知で確認できます。
+                ふたりで変更をダブルチェックできるため、見落としや入力間違いに気づきやすくなります。
               </p>
             </details>
             <details>
@@ -452,5 +494,6 @@
         <p>Made for two, with care.</p>
       </div>
     </footer>
+    <script src="./landing.js?v=20260802-1"></script>
   </body>
 </html>
